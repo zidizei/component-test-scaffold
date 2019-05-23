@@ -4,7 +4,8 @@
   "description": "Scaffold markup from backend templates for testing.",
   "main": "dist/index.js",
   "scripts": {
-    "test": "node ../../scripts/test.js"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "author": "Patrick Lam <zidizei@gmail.com>",
   "license": "MIT",
