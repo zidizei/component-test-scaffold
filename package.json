@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:ci": "jest --silent --coverage --coverageReporters=text-lcov"
+    "test:ci": "jest --silent --coverage --no-cache --ci --coverageReporters=text-lcov"
   },
   "devDependencies": {
     "@types/fetch-mock": "^7.2.5",

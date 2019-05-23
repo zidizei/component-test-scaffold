@@ -13,7 +13,7 @@ install:
 
 language: node_js
 node_js:
-  - '10'
+  - '8.12.0'
 
 script:
   - yarn test:ci | coveralls ; test ${PIPESTATUS[0]} -eq 0
