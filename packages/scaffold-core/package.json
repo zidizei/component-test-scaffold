@@ -1,0 +1,17 @@
+{
+  "name": "@component-test/scaffold-core",
+  "version": "0.0.1",
+  "description": "Core package for scaffolding templates from a backend server for testing.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "author": "Patrick Lam <zidizei@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "jsdom": "^15.1.0",
+    "node-fetch": "^2.6.0",
+    "prettier": "^1.17.1"
+  }
+}

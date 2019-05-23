@@ -1,0 +1,37 @@
+{
+  "private": true,
+  "name": "component-test-scaffold",
+  "author": "Patrick Lam <zidizei@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --silent --coverage --coverageReporters=text-lcov"
+  },
+  "devDependencies": {
+    "@types/fetch-mock": "^7.2.5",
+    "@types/jest": "^24.0.13",
+    "@types/jsdom": "^12.2.3",
+    "@types/node": "^12.0.2",
+    "@types/node-fetch": "^2.3.4",
+    "@types/prettier": "^1.16.4",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "eslint": "^5.16.0",
+    "fetch-mock": "^7.3.3",
+    "jest": "^24.8.0",
+    "jest-fetch-mock": "^2.1.2",
+    "lerna": "^3.14.1",
+    "rimraf": "^2.6.3",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "@component-test/scaffold-cli": "file:packages/scaffold-cli",
+    "@component-test/scaffold-core": "file:packages/scaffold-core"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  }
+}
