@@ -8,5 +8,5 @@
 [coverage-badge]: https://coveralls.io/repos/github/zidizei/component-test-scaffold/badge.svg?branch=dev
 [coverage-url]: https://coveralls.io/github/zidizei/component-test-scaffold?branch=dev
 
-[license-badge]: https://img.shields.io/badge/license-MIT-green.svg
+[license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license-url]: http://opensource.org/licenses/MIT
