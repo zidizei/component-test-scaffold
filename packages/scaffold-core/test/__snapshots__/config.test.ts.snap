@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Scaffold Core Config throws an Error when it cannot determine a test suite filename 1`] = `"Cannot determine Test Suite file name. Try specifiying it manually using the 'filename' option."`;
