@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Scaffold Core can get JSDOM from Cache file for scaffolding 1`] = `
+<body>
+  <strong>
+    Test
+  </strong>
+</body>
+`;
+
+exports[`Scaffold Core can get JSDOM from URL for scaffolding 1`] = `
+<body>
+  
+  
+  <strong>
+    Test
+  </strong>
+  
+
+
+</body>
+`;

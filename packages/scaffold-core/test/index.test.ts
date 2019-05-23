@@ -26,10 +26,7 @@ describe("Scaffold Core", () => {
         const actual = await scaffold(url)
 
         expect(actual.dom.window.location.href).toBe(url)
-        expect(actual.dom.window.document.querySelectorAll("strong")).toHaveLength(1)
-        expect(actual.dom.window.document.querySelectorAll("strong")[0].innerHTML).toBe(
-            "Test"
-        )
+        expect(actual.dom.window.document.body).toMatchSnapshot()
     })
 
     it("can get JSDOM from Cache file for scaffolding", async () => {
@@ -46,10 +43,7 @@ describe("Scaffold Core", () => {
         const actual = await scaffold(url)
 
         expect(actual.dom.window.location.href).toBe(url)
-        expect(actual.dom.window.document.querySelectorAll("strong")).toHaveLength(1)
-        expect(actual.dom.window.document.querySelectorAll("strong")[0].innerHTML).toBe(
-            "Test"
-        )
+        expect(actual.dom.window.document.body).toMatchSnapshot()
 
         delete mockedScaffoldData[casename]
     })
