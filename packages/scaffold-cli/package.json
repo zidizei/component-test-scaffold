@@ -1,0 +1,16 @@
+{
+  "name": "@component-test/scaffold-cli",
+  "version": "0.0.1",
+  "description": "Scaffold markup from backend templates for testing.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "node ../../scripts/test.js"
+  },
+  "author": "Patrick Lam <zidizei@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "jsdom": "^15.1.0",
+    "node-fetch": "^2.6.0",
+    "prettier": "^1.17.1"
+  }
+}
