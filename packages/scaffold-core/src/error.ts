@@ -11,7 +11,7 @@ export class LoadFromUrlError extends Error {
 export class LoadFromFileError extends Error {
 
     constructor(url: string, filePath: string) {
-        super(`Failed to load Scaffold from URL '${url}' from file '${path.relative(process.cwd(), filePath)}'.`)
+        super(`Failed to load Scaffold from URL '${url}' from file '${path.basename(filePath)}'.`)
     }
 
 }
