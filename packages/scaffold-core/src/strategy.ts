@@ -5,12 +5,14 @@ export async function loadUsingStrategy(url: string, filePath: string, options: 
     switch (options.loadStrategy) {
         case "networkFirst":
             return loadFromUrl(url, filePath, options)
-                .catch(() => {
-                    return loadFromFile(url, filePath, options)
-                })
+                .catch(() => loadFromFile(url, filePath, options))
 
         case "networkOnly":
             return loadFromUrl(url, filePath, options)
+
+        case "cacheFirst":
+            return loadFromFile(url, filePath, options)
+                .catch(() => loadFromUrl(url, filePath, options))
     }
 
     throw new Error(`Unknown load strategy '${options.loadStrategy}'.`)

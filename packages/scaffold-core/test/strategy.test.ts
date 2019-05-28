@@ -1,6 +1,9 @@
 // import fs from "fs"
 import path from "path"
 
+jest.mock("./__scaffolds__/index.test.scaffold.js")
+const mockedScaffoldData = require("./__scaffolds__/index.test.scaffold.js")
+
 import * as load from "../src/load"
 
 import { ScaffoldOptions } from "../src"
@@ -14,6 +17,7 @@ describe("Scaffold Core", () => {
         "__scaffolds__/index.test.scaffold.js"
     )
 
+    const casename = "test case"
     const url = "https://localhost:8080/patterns/component"
 
     let spyLoadFromFile: jest.SpyInstance
@@ -66,6 +70,26 @@ describe("Scaffold Core", () => {
 
         expect(spyLoadFromUrl).toHaveBeenCalledTimes(1)
         expect(spyLoadFromFile).toHaveBeenCalledTimes(0)
+    })
+
+    it("can get HTML for scaffolding from 'cacheFirst'", async () => {
+        mockedScaffoldData[casename] = { casename }
+
+        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "cacheFirst", casename } as ScaffoldOptions)
+
+        expect(spyLoadFromUrl).toHaveBeenCalledTimes(0)
+        expect(spyLoadFromFile).toHaveBeenCalledTimes(1)
+
+        delete mockedScaffoldData[casename]
+    })
+
+    it("can get HTML for scaffolding from 'cacheFirst' with Cache file backup", async () => {
+        fetchMock.mockResponseOnce(template)
+
+        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "cacheFirst" } as ScaffoldOptions)
+
+        expect(spyLoadFromUrl).toHaveBeenCalledTimes(1)
+        expect(spyLoadFromFile).toHaveBeenCalledTimes(1)
     })
 
     it("throws an Error when an unrecognized strategy is used", async () => {
