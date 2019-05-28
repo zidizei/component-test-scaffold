@@ -42,11 +42,30 @@ describe("Scaffold Core", () => {
         fetchMock.mockResponseOnce(template, { status: 400 })
         spyLoadFromFile.mockImplementationOnce(() => Promise.resolve())
 
-        const casename = "test case"
-        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "networkFirst", casename } as ScaffoldOptions)
+        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "networkFirst" } as ScaffoldOptions)
 
         expect(spyLoadFromUrl).toHaveBeenCalledTimes(1)
         expect(spyLoadFromFile).toHaveBeenCalledTimes(1)
+    })
+
+    it("can get HTML for scaffolding from 'networkOnly'", async () => {
+        fetchMock.mockResponseOnce(template)
+
+        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "networkOnly" } as ScaffoldOptions)
+
+        expect(spyLoadFromUrl).toHaveBeenCalledTimes(1)
+        expect(spyLoadFromFile).toHaveBeenCalledTimes(0)
+    })
+
+    it("throws an Error when 'networkOnly' strategy fails", async () => {
+        fetchMock.mockResponseOnce(template, { status: 400 })
+
+        await expect(
+            loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "networkOnly" } as ScaffoldOptions)
+        ).rejects.toThrowErrorMatchingSnapshot()
+
+        expect(spyLoadFromUrl).toHaveBeenCalledTimes(1)
+        expect(spyLoadFromFile).toHaveBeenCalledTimes(0)
     })
 
     it("throws an Error when an unrecognized strategy is used", async () => {
@@ -54,7 +73,7 @@ describe("Scaffold Core", () => {
             url,
             scaffoldLocation,
             { loadStrategy: "unknown" } as any,
-        )).rejects.toThrow(`Unknown load strategy 'unknown'`)
+        )).rejects.toThrowErrorMatchingSnapshot()
     })
 
 })

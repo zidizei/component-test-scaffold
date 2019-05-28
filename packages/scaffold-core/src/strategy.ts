@@ -8,6 +8,9 @@ export async function loadUsingStrategy(url: string, filePath: string, options: 
                 .catch(() => {
                     return loadFromFile(url, filePath, options)
                 })
+
+        case "networkOnly":
+            return loadFromUrl(url, filePath, options)
     }
 
     throw new Error(`Unknown load strategy '${options.loadStrategy}'.`)
