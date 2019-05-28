@@ -3,8 +3,6 @@ import path from "path"
 
 import prettier from "prettier"
 
-jest.mock("fs")
-
 import { IScaffoldData, ScaffoldOptions } from "../src"
 import {
     loadFromUrl,
@@ -21,8 +19,10 @@ describe("Scaffold Core", () => {
         "__scaffolds__/index.test.scaffold.js"
     )
 
-    const mockedFS = fs as jest.Mocked<typeof fs> // Let TypeScript that 'fs' has been mocked.
     const url = "https://localhost:8080/patterns/component"
+
+    let spyExistsSync: jest.SpyInstance
+    let spyWriteFile: jest.SpyInstance
 
     jest.mock("./__scaffolds__/index.test.scaffold.js", () => ({}))
 
@@ -30,6 +30,12 @@ describe("Scaffold Core", () => {
 
     beforeEach(() => {
         fetchMock.resetMocks()
+        spyExistsSync = jest.spyOn(fs, "existsSync")
+        spyWriteFile = jest.spyOn(fs, "writeFile")
+    })
+
+    afterEach(() => {
+        jest.restoreAllMocks()
     })
 
     it("can get HTML for scaffolding from URL", async () => {
@@ -106,8 +112,8 @@ describe("Scaffold Core", () => {
             template
         }
 
-        mockedFS.existsSync.mockImplementation(() => false)
-        mockedFS.writeFile.mockImplementation((_filePath, _data, callback) => {
+        spyExistsSync.mockImplementation(() => false)
+        spyWriteFile.mockImplementation((_filePath, _data, callback) => {
             callback(null)
         })
 
@@ -117,7 +123,7 @@ describe("Scaffold Core", () => {
             casedata
         )
 
-        expect(mockedFS.writeFile).toHaveBeenCalledWith(
+        expect(spyWriteFile).toHaveBeenCalledWith(
             scaffoldLocation,
             expect.any(String),
             expect.any(Function)
@@ -135,8 +141,8 @@ describe("Scaffold Core", () => {
 
         mockedScaffoldData[casename] = casedata
 
-        mockedFS.existsSync.mockImplementation(() => true)
-        mockedFS.writeFile.mockImplementation((_filePath, data, callback) => {
+        spyExistsSync.mockImplementation(() => true)
+        spyWriteFile.mockImplementation((_filePath, data, callback) => {
             contents = data
             callback(null)
         })
@@ -147,12 +153,16 @@ describe("Scaffold Core", () => {
             casedata
         )
 
-        expect(contents).toMatchSnapshot()
-        expect(mockedFS.writeFile).toHaveBeenCalledWith(
+        expect(spyWriteFile).toHaveBeenCalledWith(
             scaffoldLocation,
             expect.any(String),
             expect.any(Function)
         )
+
+        spyExistsSync.mockRestore()
+        spyWriteFile.mockRestore()
+
+        expect(contents).toMatchSnapshot()
     })
 
     it("throws Error when failing to update Cache file", async () => {
@@ -165,8 +175,8 @@ describe("Scaffold Core", () => {
 
         mockedScaffoldData[casename] = casedata
 
-        mockedFS.existsSync.mockImplementation(() => true)
-        mockedFS.writeFile.mockImplementation((_filePath, _data, callback) => {
+        spyExistsSync.mockImplementation(() => true)
+        spyWriteFile.mockImplementation((_filePath, _data, callback) => {
             callback(new Error(msg))
         })
 
