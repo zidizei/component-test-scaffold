@@ -24,7 +24,6 @@ export type Scaffold = {
 export type ScaffoldOptions = {
     filename: string
     casename: string
-    fallback?: boolean
     writeback?: boolean
     loadStrategy?: "networkFirst" | "networkOnly" | "cacheFirst" | "cacheOnly" // TODO
     agent?: https.AgentOptions

@@ -13,3 +13,7 @@ exports[\`another case\`] = {
 
 "
 `;
+
+exports[`Scaffold Core throws an Error when failing to load from Cache file 1`] = `"Cannot read property 'ok' of undefined"`;
+
+exports[`Scaffold Core throws an Error when failing to load from URL 1`] = `"Failed to load Scaffold from URL 'https://localhost:8080/patterns/component'"`;

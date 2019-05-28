@@ -44,32 +44,22 @@ describe("Scaffold Core", () => {
         const actual = await loadFromUrl(url, scaffoldLocation, {
             agent: { rejectUnauthorized: false },
             casename: "/patterns/component",
-            fallback: true
         } as ScaffoldOptions)
 
         expect(actual.currentScaffold.template).toBe(prettierTemplate)
         expect(actual.currentScaffold.url).toBe(url)
     })
 
-    it("can get HTML for scaffolding from failing URL via Cache file", async () => {
+    it("throws an Error when failing to load from URL", async () => {
         fetchMock.mockResponseOnce(template, { status: 400 })
 
-        const casename = "test case"
-        const casedata: IScaffoldData = {
-            url,
-            template
-        }
-
-        mockedScaffoldData[casename] = casedata
-
-        const actual = await loadFromUrl(url, scaffoldLocation, {
-            agent: { rejectUnauthorized: false },
-            casename,
-            fallback: true
-        } as ScaffoldOptions)
-
-        expect(actual.currentScaffold.template).toBe(template)
-        expect(actual.currentScaffold.url).toBe(url)
+        await expect(
+            loadFromUrl(
+                url, scaffoldLocation, {
+                    agent: { rejectUnauthorized: false },
+                } as ScaffoldOptions
+            )
+        ).rejects.toThrowErrorMatchingSnapshot()
     })
 
     it("can get HTML for scaffolding from Cache file", async () => {
@@ -83,7 +73,6 @@ describe("Scaffold Core", () => {
 
         const actual = await loadFromFile(url, scaffoldLocation, {
             casename,
-            fallback: true
         } as ScaffoldOptions)
 
         expect(actual.currentScaffold.template).toBe(template)
@@ -92,17 +81,14 @@ describe("Scaffold Core", () => {
         delete mockedScaffoldData[casename]
     })
 
-    it("can get HTML for scaffolding from Cache file for a new case name via URL", async () => {
-        const casename = "test case"
-        fetchMock.mockResponseOnce(template)
-
-        const actual = await loadFromFile(url, scaffoldLocation, {
-            casename,
-            fallback: true
-        } as ScaffoldOptions)
-
-        expect(actual.currentScaffold.template).toBe(prettierTemplate)
-        expect(actual.currentScaffold.url).toBe(url)
+    it("throws an Error when failing to load from Cache file", async () => {
+        await expect(
+            loadFromUrl(
+                url, scaffoldLocation, {
+                    agent: { rejectUnauthorized: false },
+                } as ScaffoldOptions
+            )
+        ).rejects.toThrowErrorMatchingSnapshot()
     })
 
     it("can create scaffold Cache file", async () => {
