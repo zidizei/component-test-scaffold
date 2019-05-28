@@ -2,21 +2,20 @@ import { ScaffoldOptions } from "."
 import { loadFromUrl, loadFromFile } from "./load"
 
 export async function loadUsingStrategy(url: string, filePath: string, options: ScaffoldOptions) {
+    const fileStrategy = async () => loadFromFile(url, filePath, options)
+    const urlStrategy = async () => loadFromUrl(url, filePath, options)
+
     switch (options.loadStrategy) {
-        case "networkFirst":
-            return loadFromUrl(url, filePath, options)
-                .catch(() => loadFromFile(url, filePath, options))
-
         case "networkOnly":
-            return loadFromUrl(url, filePath, options)
+            return urlStrategy()
 
-        case "cacheFirst":
-            return loadFromFile(url, filePath, options)
-                .catch(() => loadFromUrl(url, filePath, options))
+        case "networkFirst":
+            return urlStrategy().catch(() => fileStrategy())
 
         case "cacheOnly":
-            return loadFromFile(url, filePath, options)
-    }
+            return fileStrategy()
 
-    throw new Error(`Unknown load strategy '${options.loadStrategy}'.`)
+        default:
+            return fileStrategy().catch(() => urlStrategy())
+    }
 }

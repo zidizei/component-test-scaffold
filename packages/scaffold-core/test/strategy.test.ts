@@ -112,12 +112,13 @@ describe("Scaffold Core", () => {
         expect(spyLoadFromFile).toHaveBeenCalledTimes(1)
     })
 
-    it("throws an Error when an unrecognized strategy is used", async () => {
-        await expect(loadUsingStrategy(
-            url,
-            scaffoldLocation,
-            { loadStrategy: "unknown" } as any,
-        )).rejects.toThrowErrorMatchingSnapshot()
+    it("uses 'cacheFirst' strategy by default", async () => {
+        fetchMock.mockResponseOnce(template)
+
+        await loadUsingStrategy(url, scaffoldLocation, {} as ScaffoldOptions)
+
+        expect(spyLoadFromUrl).toHaveBeenCalledTimes(1)
+        expect(spyLoadFromFile).toHaveBeenCalledTimes(1)
     })
 
 })

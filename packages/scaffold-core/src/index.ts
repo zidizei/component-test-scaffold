@@ -1,11 +1,10 @@
-import fs from "fs"
 import https from "https"
 import path from "path"
 
 import { JSDOM } from "jsdom"
 
 import { configure } from "./config"
-import { loadFromFile, loadFromUrl } from "./load"
+import { loadUsingStrategy } from "./strategy"
 
 export interface IScaffoldData {
     url: string
@@ -36,10 +35,7 @@ export default async function (url: string, opts = {} as Partial<ScaffoldOptions
     const scaffoldFile = `${path.basename(options.filename, path.extname(options.filename))}.scaffold.js`
     const scaffoldLocation = path.join(scaffoldPath, scaffoldFile)
 
-    const html = fs.existsSync(scaffoldLocation)
-        ? await loadFromFile(url, scaffoldLocation, options)
-        : await loadFromUrl(url, scaffoldLocation, options)
-
+    const html = await loadUsingStrategy(url, scaffoldLocation, options)
     const {template} = html.currentScaffold
 
     return {
