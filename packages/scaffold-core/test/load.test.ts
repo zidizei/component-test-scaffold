@@ -83,7 +83,7 @@ describe("Scaffold Core", () => {
 
     it("throws an Error when failing to load from Cache file", async () => {
         await expect(
-            loadFromUrl(
+            loadFromFile(
                 url, scaffoldLocation, {
                     agent: { rejectUnauthorized: false },
                 } as ScaffoldOptions

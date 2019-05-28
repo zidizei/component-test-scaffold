@@ -5,13 +5,14 @@ import fetch from "node-fetch"
 import prettier from "prettier"
 
 import { Scaffold, ScaffoldOptions, IScaffoldData } from "."
+import { LoadFromFileError, LoadFromUrlError } from "./error"
 
 export async function loadFromUrl(url: string, filePath: string, options: ScaffoldOptions): Promise<Scaffold> {
     const agent = new https.Agent(options.agent)
     const resp = await fetch(url, { agent })
 
     if (!resp.ok) {
-        throw new Error(`Failed to load Scaffold from URL '${url}'`)
+        throw new LoadFromUrlError(url)
     }
 
     const template = await resp.text()
@@ -33,7 +34,7 @@ export async function loadFromFile(url: string, filePath: string, options: Scaff
     const scaffold: { [c: string]: IScaffoldData } = require(filePath)
 
     if (scaffold[casename] === undefined) {
-        throw new Error(`Failed to load Scaffold with URL '${url}' from file '${filePath}'`)
+        throw new LoadFromFileError(url, filePath)
     }
 
     return {
