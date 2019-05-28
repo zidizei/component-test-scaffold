@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Scaffold Core can get HTML for scaffolding from 'cacheOnly' with Cache file backup 1`] = `"Failed to load Scaffold from URL 'https://localhost:8080/patterns/component' from file 'test/__scaffolds__/index.test.scaffold.js'."`;
+
 exports[`Scaffold Core throws an Error when 'networkOnly' strategy fails 1`] = `"Failed to load Scaffold from URL 'https://localhost:8080/patterns/component'."`;
 
 exports[`Scaffold Core throws an Error when an unrecognized strategy is used 1`] = `"Unknown load strategy 'unknown'."`;

@@ -92,6 +92,26 @@ describe("Scaffold Core", () => {
         expect(spyLoadFromFile).toHaveBeenCalledTimes(1)
     })
 
+    it("can get HTML for scaffolding from 'cacheOnly'", async () => {
+        mockedScaffoldData[casename] = { casename }
+
+        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "cacheOnly", casename } as ScaffoldOptions)
+
+        expect(spyLoadFromUrl).toHaveBeenCalledTimes(0)
+        expect(spyLoadFromFile).toHaveBeenCalledTimes(1)
+
+        delete mockedScaffoldData[casename]
+    })
+
+    it("can get HTML for scaffolding from 'cacheOnly' with Cache file backup", async () => {
+        await expect(
+            loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "cacheOnly" } as ScaffoldOptions)
+        ).rejects.toThrowErrorMatchingSnapshot()
+
+        expect(spyLoadFromUrl).toHaveBeenCalledTimes(0)
+        expect(spyLoadFromFile).toHaveBeenCalledTimes(1)
+    })
+
     it("throws an Error when an unrecognized strategy is used", async () => {
         await expect(loadUsingStrategy(
             url,
