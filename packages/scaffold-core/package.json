@@ -4,6 +4,8 @@
   "description": "Core package for scaffolding templates from a backend server for testing.",
   "main": "dist/index.js",
   "scripts": {
+    "build": "tsc --build .",
+    "clean": "rimraf dist build",
     "test": "jest",
     "test:watch": "jest --watch"
   },

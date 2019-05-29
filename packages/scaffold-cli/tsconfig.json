@@ -1,0 +1,12 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "tsBuildInfoFile": "./build/tsbuildinfo.json",
+        "rootDir": "src",
+        "outDir": "dist"
+    },
+    "include": ["src"],
+    "references": [
+        { "path": "../scaffold-core" }
+    ]
+}

@@ -3,15 +3,20 @@
   "version": "0.0.1",
   "description": "Scaffold markup from backend templates for testing.",
   "main": "dist/index.js",
+  "bin": {
+    "scaffold": "./bin/scaffold.js"
+  },
   "scripts": {
+    "build": "tsc --build .",
+    "clean": "rimraf dist build",
     "test": "jest",
     "test:watch": "jest --watch"
   },
   "author": "Patrick Lam <zidizei@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "jsdom": "^15.1.0",
-    "node-fetch": "^2.6.0",
-    "prettier": "^1.17.1"
+    "@component-test/scaffold-core": "*",
+    "glob": "^7.1.4",
+    "yargs": "^13.2.4"
   }
 }

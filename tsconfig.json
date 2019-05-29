@@ -1,25 +1,7 @@
 {
-    "compilerOptions": {
-        "target": "es2017",
-        "module": "commonjs",
-        "lib": ["dom", "es2017"],
-        "declaration": true,
-        "declarationMap": true,
-        "composite": true,
-        "emitDeclarationOnly": true,
-        "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noImplicitReturns": true,
-        "noFallthroughCasesInSwitch": true,
-        "moduleResolution": "node",
-        "esModuleInterop": true,
-        "resolveJsonModule": true
-    },
+    "extends": "./tsconfig.options.json",
     "exclude": [
         ".yarn/releases/*",
-        "**/__tests__/**/*",
-        "**/build/**/*",
-        "**/build-es5/**/*"
+        "**/dist/**/*"
     ]
 }

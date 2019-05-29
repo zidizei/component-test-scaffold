@@ -31,7 +31,9 @@ lerna-debug.log
 !.gitkeep
 
 # project
+/build
 /test/coverage
+/packages/*/build/
 /packages/*/dist/
 /packages/*/test/coverage/
 /packages/*/node_modules/
