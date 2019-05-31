@@ -12,6 +12,7 @@ import {
 
 describe("Scaffold Core", () => {
 
+    const filename = __filename
     const template = "<body><strong>Test</strong></body>"
     const prettierTemplate = prettier.format(template, { parser: "html" })
     const scaffoldLocation = path.resolve(
@@ -66,6 +67,8 @@ describe("Scaffold Core", () => {
         const casename = "test case"
         const casedata: IScaffoldData = {
             url,
+            casename,
+            filename,
             template
         }
 
@@ -95,6 +98,8 @@ describe("Scaffold Core", () => {
         const casename = "writeback"
         const casedata: IScaffoldData = {
             url,
+            casename,
+            filename,
             template
         }
 
@@ -120,6 +125,8 @@ describe("Scaffold Core", () => {
         const casename = "/write/back"
         const casedata: IScaffoldData = {
             url,
+            casename,
+            filename,
             template
         }
 
@@ -156,6 +163,8 @@ describe("Scaffold Core", () => {
         const casename = "/write/back"
         const casedata: IScaffoldData = {
             url,
+            casename,
+            filename,
             template
         }
 

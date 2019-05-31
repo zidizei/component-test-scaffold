@@ -8,6 +8,7 @@ import { Scaffold, ScaffoldOptions, IScaffoldData } from "."
 import { LoadFromFileError, LoadFromUrlError } from "./error"
 
 export async function loadFromUrl(url: string, filePath: string, options: ScaffoldOptions): Promise<Scaffold> {
+    const {casename, filename} = options
     const agent = new https.Agent(options.agent)
     const resp = await fetch(url, { agent })
 
@@ -16,8 +17,10 @@ export async function loadFromUrl(url: string, filePath: string, options: Scaffo
     }
 
     const template = await resp.text()
-    const scaffold = {
+    const scaffold: IScaffoldData = {
         url,
+        filename,
+        casename,
         template: prettier.format(template, { parser: "html" })
     }
 

@@ -7,4 +7,9 @@ module.exports = Object.assign({}, baseConfig, {
     setupFiles: [
         "./test/setup.ts"
     ],
+    globals: {
+        "ts-jest": {
+            tsConfig: "<rootDir>/test/tsconfig.json"
+        }
+    }
 });

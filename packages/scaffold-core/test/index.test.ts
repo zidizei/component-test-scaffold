@@ -35,9 +35,12 @@ describe("Scaffold Core", () => {
     it("can get JSDOM from Cache file for scaffolding", async () => {
         spyExistsSync.mockImplementation(() => true)
 
+        const filename = __filename
         const casename = "/patterns/component"
         const casedata: IScaffoldData = {
             url,
+            casename,
+            filename,
             template
         }
 
