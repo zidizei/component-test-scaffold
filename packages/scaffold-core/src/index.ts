@@ -8,12 +8,13 @@ import { loadUsingStrategy } from "./strategy"
 
 export interface IScaffoldData {
     url: string
-    casename: string
-    filename: string
+    test: string
     template: string
 }
 
-export interface IScaffoldResult extends IScaffoldData {
+export interface IScaffoldResult {
+    url: string
+    template: string
     dom: JSDOM
 }
 
@@ -43,8 +44,6 @@ export default async function (url: string, opts = {} as Partial<ScaffoldOptions
     return {
         url,
         template,
-        casename: options.casename,
-        filename: options.filename,
         dom: new JSDOM(template, { url }),
     }
 }
