@@ -44,6 +44,7 @@ describe("Scaffold Core", () => {
 
         const actual = await loadFromUrl(url, scaffoldLocation, {
             agent: { rejectUnauthorized: false },
+            filename,
             casename: "/patterns/component",
         } as ScaffoldOptions)
 
@@ -57,6 +58,7 @@ describe("Scaffold Core", () => {
         await expect(
             loadFromUrl(
                 url, scaffoldLocation, {
+                    filename,
                     agent: { rejectUnauthorized: false },
                 } as ScaffoldOptions
             )
@@ -88,6 +90,7 @@ describe("Scaffold Core", () => {
         await expect(
             loadFromFile(
                 url, scaffoldLocation, {
+                    filename,
                     agent: { rejectUnauthorized: false },
                 } as ScaffoldOptions
             )
@@ -126,7 +129,7 @@ describe("Scaffold Core", () => {
         const casedata: IScaffoldData = {
             url,
             casename,
-            filename,
+            filename: path.relative(scaffoldLocation, filename),
             template
         }
 

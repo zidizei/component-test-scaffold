@@ -1,4 +1,5 @@
 import fs from "fs"
+import path from "path"
 import https from "https"
 
 import fetch from "node-fetch"
@@ -19,8 +20,8 @@ export async function loadFromUrl(url: string, filePath: string, options: Scaffo
     const template = await resp.text()
     const scaffold: IScaffoldData = {
         url,
-        filename,
         casename,
+        filename: path.relative(filePath, filename),
         template: prettier.format(template, { parser: "html" })
     }
 

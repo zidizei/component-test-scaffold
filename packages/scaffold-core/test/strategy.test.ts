@@ -10,6 +10,7 @@ import { loadUsingStrategy } from "../src/strategy"
 
 describe("Scaffold Core", () => {
 
+    const filename = __filename
     const template = "<body><strong>Test</strong></body>"
     const scaffoldLocation = path.resolve(
         __dirname,
@@ -35,7 +36,7 @@ describe("Scaffold Core", () => {
     it("can get HTML for scaffolding from 'networkFirst'", async () => {
         fetchMock.mockResponseOnce(template)
 
-        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "networkFirst" } as ScaffoldOptions)
+        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "networkFirst", filename } as ScaffoldOptions)
 
         expect(spyLoadFromUrl).toHaveBeenCalledTimes(1)
         expect(spyLoadFromFile).toHaveBeenCalledTimes(0)
@@ -45,7 +46,7 @@ describe("Scaffold Core", () => {
         fetchMock.mockResponseOnce(template, { status: 400 })
         spyLoadFromFile.mockImplementationOnce(() => Promise.resolve())
 
-        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "networkFirst" } as ScaffoldOptions)
+        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "networkFirst", filename } as ScaffoldOptions)
 
         expect(spyLoadFromUrl).toHaveBeenCalledTimes(1)
         expect(spyLoadFromFile).toHaveBeenCalledTimes(1)
@@ -54,7 +55,7 @@ describe("Scaffold Core", () => {
     it("can get HTML for scaffolding from 'networkOnly'", async () => {
         fetchMock.mockResponseOnce(template)
 
-        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "networkOnly" } as ScaffoldOptions)
+        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "networkOnly", filename } as ScaffoldOptions)
 
         expect(spyLoadFromUrl).toHaveBeenCalledTimes(1)
         expect(spyLoadFromFile).toHaveBeenCalledTimes(0)
@@ -64,7 +65,7 @@ describe("Scaffold Core", () => {
         fetchMock.mockResponseOnce(template, { status: 400 })
 
         await expect(
-            loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "networkOnly" } as ScaffoldOptions)
+            loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "networkOnly", filename } as ScaffoldOptions)
         ).rejects.toThrowErrorMatchingSnapshot()
 
         expect(spyLoadFromUrl).toHaveBeenCalledTimes(1)
@@ -74,7 +75,7 @@ describe("Scaffold Core", () => {
     it("can get HTML for scaffolding from 'cacheFirst'", async () => {
         mockedScaffoldData[casename] = { casename }
 
-        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "cacheFirst", casename } as ScaffoldOptions)
+        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "cacheFirst", casename, filename } as ScaffoldOptions)
 
         expect(spyLoadFromUrl).toHaveBeenCalledTimes(0)
         expect(spyLoadFromFile).toHaveBeenCalledTimes(1)
@@ -85,7 +86,7 @@ describe("Scaffold Core", () => {
     it("can get HTML for scaffolding from 'cacheFirst' with Cache file backup", async () => {
         fetchMock.mockResponseOnce(template)
 
-        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "cacheFirst" } as ScaffoldOptions)
+        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "cacheFirst", filename } as ScaffoldOptions)
 
         expect(spyLoadFromUrl).toHaveBeenCalledTimes(1)
         expect(spyLoadFromFile).toHaveBeenCalledTimes(1)
@@ -94,7 +95,7 @@ describe("Scaffold Core", () => {
     it("can get HTML for scaffolding from 'cacheOnly'", async () => {
         mockedScaffoldData[casename] = { casename }
 
-        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "cacheOnly", casename } as ScaffoldOptions)
+        await loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "cacheOnly", casename, filename } as ScaffoldOptions)
 
         expect(spyLoadFromUrl).toHaveBeenCalledTimes(0)
         expect(spyLoadFromFile).toHaveBeenCalledTimes(1)
@@ -104,7 +105,7 @@ describe("Scaffold Core", () => {
 
     it("can get HTML for scaffolding from 'cacheOnly' with Cache file backup", async () => {
         await expect(
-            loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "cacheOnly" } as ScaffoldOptions)
+            loadUsingStrategy(url, scaffoldLocation, { loadStrategy: "cacheOnly", filename } as ScaffoldOptions)
         ).rejects.toThrowErrorMatchingSnapshot()
 
         expect(spyLoadFromUrl).toHaveBeenCalledTimes(0)
@@ -114,7 +115,7 @@ describe("Scaffold Core", () => {
     it("uses 'cacheFirst' strategy by default", async () => {
         fetchMock.mockResponseOnce(template)
 
-        await loadUsingStrategy(url, scaffoldLocation, {} as ScaffoldOptions)
+        await loadUsingStrategy(url, scaffoldLocation, { filename } as ScaffoldOptions)
 
         expect(spyLoadFromUrl).toHaveBeenCalledTimes(1)
         expect(spyLoadFromFile).toHaveBeenCalledTimes(1)

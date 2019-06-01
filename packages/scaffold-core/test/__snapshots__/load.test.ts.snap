@@ -4,14 +4,14 @@ exports[`Scaffold Core can update scaffold Cache file 1`] = `
 "exports[\`/write/back\`] = {
   url: \\"https://localhost:8080/patterns/component\\",
   casename: \\"/write/back\\",
-  filename: \\"/Users/plam/Workspace/namics-frontend/testing/component-test-scaffold/packages/scaffold-core/test/load.test.ts\\",
+  filename: \\"../../load.test.ts\\",
   template: \\"<body><strong>Test</strong></body>\\"
 }
 
 exports[\`another case\`] = {
   url: \\"https://localhost:8080/patterns/component\\",
   casename: \\"/write/back\\",
-  filename: \\"/Users/plam/Workspace/namics-frontend/testing/component-test-scaffold/packages/scaffold-core/test/load.test.ts\\",
+  filename: \\"../../load.test.ts\\",
   template: \\"<body><strong>Test</strong></body>\\"
 }
 
