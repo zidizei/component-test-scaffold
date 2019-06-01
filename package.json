@@ -4,6 +4,7 @@
   "author": "Patrick Lam <zidizei@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build": "lerna run build",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --silent --coverage --no-cache --ci --coverageReporters=text-lcov"
