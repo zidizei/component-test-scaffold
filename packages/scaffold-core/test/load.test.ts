@@ -69,8 +69,7 @@ describe("Scaffold Core", () => {
         const casename = "test case"
         const casedata: IScaffoldData = {
             url,
-            casename,
-            filename,
+            test: filename,
             template
         }
 
@@ -101,8 +100,7 @@ describe("Scaffold Core", () => {
         const casename = "writeback"
         const casedata: IScaffoldData = {
             url,
-            casename,
-            filename,
+            test: filename,
             template
         }
 
@@ -128,8 +126,7 @@ describe("Scaffold Core", () => {
         const casename = "/write/back"
         const casedata: IScaffoldData = {
             url,
-            casename,
-            filename: path.relative(scaffoldLocation, filename),
+            test: path.relative(scaffoldLocation, filename),
             template
         }
 
@@ -166,8 +163,7 @@ describe("Scaffold Core", () => {
         const casename = "/write/back"
         const casedata: IScaffoldData = {
             url,
-            casename,
-            filename,
+            test: filename,
             template
         }
 

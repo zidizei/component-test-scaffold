@@ -3,15 +3,13 @@
 exports[`Scaffold Core can update scaffold Cache file 1`] = `
 "exports[\`/write/back\`] = {
   url: \\"https://localhost:8080/patterns/component\\",
-  casename: \\"/write/back\\",
-  filename: \\"../../load.test.ts\\",
+  test: \\"../../load.test.ts\\",
   template: \\"<body><strong>Test</strong></body>\\"
 }
 
 exports[\`another case\`] = {
   url: \\"https://localhost:8080/patterns/component\\",
-  casename: \\"/write/back\\",
-  filename: \\"../../load.test.ts\\",
+  test: \\"../../load.test.ts\\",
   template: \\"<body><strong>Test</strong></body>\\"
 }
 

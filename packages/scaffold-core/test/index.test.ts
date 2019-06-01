@@ -39,8 +39,7 @@ describe("Scaffold Core", () => {
         const casename = "/patterns/component"
         const casedata: IScaffoldData = {
             url,
-            casename,
-            filename,
+            test: filename,
             template
         }
 
