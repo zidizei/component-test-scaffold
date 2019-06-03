@@ -16,14 +16,14 @@ export async function update(patterns: Array<string>, {verbose}: Parsed): Promis
     await matches.forEach(async (filePath) => {
         const scaffold: { [c: string]: IScaffoldData } = require(filePath)
         const updates = Object.keys(scaffold).map((casename) => {
-            const cas = scaffold[casename]
+            const {url, test: filename} = scaffold[casename]
 
             if (verbose) {
                 console.log("Updating '" + casename + "'.")
             }
 
-            return load(cas.url, {
-                filename: cas.test,
+            return load(url, {
+                filename,
                 casename,
                 writeback: true,
                 loadStrategy: "networkOnly"

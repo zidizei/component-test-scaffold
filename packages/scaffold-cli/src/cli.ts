@@ -1,5 +1,6 @@
 import yargs from "yargs"
 
+import { update } from "./index"
 import version from "./version"
 
 const CLI_VERSION = version()
@@ -13,21 +14,20 @@ const CLI_OPTS = {
 }
 
 export type Parsed = {
-    [key: string]: unknown
+    [x: string]: unknown
     verbose: boolean | undefined
-    patterns: Array<string>
     $0: string
 }
 
 export async function run(argv?: Array<string>) {
     argv = argv || process.argv.slice(2)
 
-    const parsed = yargs(argv)
+    const {_: patterns, ...parsed} = yargs(argv)
         .usage(CLI_USAGE)
         .options(CLI_OPTS)
         .version(CLI_VERSION)
         .alias("h", "help")
         .argv
 
-    console.log(parsed)
+    update(patterns, parsed)
 }
