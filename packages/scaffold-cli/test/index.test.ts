@@ -50,8 +50,7 @@ describe("Scaffold CLI", () => {
         const casename = "test case"
         const casedata: IScaffoldData = {
             url,
-            casename,
-            filename,
+            test: path.relative(path.dirname(scaffoldLocation), filename),
             template
         }
 
