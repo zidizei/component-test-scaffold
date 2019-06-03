@@ -16,6 +16,8 @@ exports[\`another case\`] = {
 "
 `;
 
+exports[`Scaffold Core throws an Error when URL is rejected by fetch 1`] = `"Fetch Error"`;
+
 exports[`Scaffold Core throws an Error when failing to load from Cache file 1`] = `"Failed to load Scaffold from URL 'https://localhost:8080/patterns/component' from file 'index.test.scaffold.js'."`;
 
 exports[`Scaffold Core throws an Error when failing to load from URL 1`] = `"Failed to load Scaffold from URL 'https://localhost:8080/patterns/component'."`;

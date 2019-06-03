@@ -21,6 +21,7 @@ describe("Scaffold Core", () => {
     )
 
     const url = "https://localhost:8080/patterns/component"
+    const url2 = "http://localhost:8080/patterns/component"
 
     let spyExistsSync: jest.SpyInstance
     let spyWriteFile: jest.SpyInstance
@@ -52,8 +53,34 @@ describe("Scaffold Core", () => {
         expect(actual.currentScaffold.url).toBe(url)
     })
 
+    it("can get HTML for scaffolding from URL via http", async () => {
+        fetchMock.mockResponseOnce(template)
+
+        const actual = await loadFromUrl(url2, scaffoldLocation, {
+            agent: { rejectUnauthorized: false },
+            filename,
+            casename: "/patterns/component",
+        } as ScaffoldOptions)
+
+        expect(actual.currentScaffold.template).toBe(prettierTemplate)
+        expect(actual.currentScaffold.url).toBe(url2)
+    })
+
     it("throws an Error when failing to load from URL", async () => {
         fetchMock.mockResponseOnce(template, { status: 400 })
+
+        await expect(
+            loadFromUrl(
+                url, scaffoldLocation, {
+                    filename,
+                    agent: { rejectUnauthorized: false },
+                } as ScaffoldOptions
+            )
+        ).rejects.toThrowErrorMatchingSnapshot()
+    })
+
+    it("throws an Error when URL is rejected by fetch", async () => {
+        fetchMock.mockReject(new Error("Fetch Error"))
 
         await expect(
             loadFromUrl(
