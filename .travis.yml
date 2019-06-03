@@ -16,6 +16,7 @@ node_js:
   - '8.12.0'
 
 script:
-  - lerna bootstrap
-  - lerna run build
+  - yarn lerna bootstrap
+  - yarn lerna link
+  - yarn build
   - yarn test:ci | coveralls ; test ${PIPESTATUS[0]} -eq 0
