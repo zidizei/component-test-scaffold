@@ -5,9 +5,10 @@ import console from "console"
 
 export async function glob(patterns: Array<string>): Promise<string[]> {
     const pattern = (patterns.length > 0) ? `+(${patterns.join("|")}).*` : "*"
+    const globPath = path.resolve(`./**/__scaffolds__/${pattern}.scaffold.js`)
 
     return new Promise((resolve, reject) => {
-        baseGlob(path.resolve(`./**/__scaffolds__/${pattern}.scaffold.js`), (err, matches) => {
+        baseGlob(globPath, { ignore: ["**/node_modules/**"] }, (err, matches) => {
             if (err) { return reject(err) }
             resolve(matches)
         })

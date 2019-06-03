@@ -58,7 +58,7 @@ describe("Scaffold CLI", () => {
             callback(null)
         })
 
-        mockedGlob.mockImplementationOnce((_path, callback) => {
+        mockedGlob.mockImplementationOnce((_path, _opts, callback) => {
             callback(null, [scaffoldLocation, scaffoldLocation])
         })
 
@@ -87,7 +87,7 @@ describe("Scaffold CLI", () => {
             callback(null)
         })
 
-        mockedGlob.mockImplementationOnce((_path, callback) => {
+        mockedGlob.mockImplementationOnce((_path, _opts, callback) => {
             callback(null, [scaffoldLocation])
         })
 
@@ -116,7 +116,7 @@ describe("Scaffold CLI", () => {
             callback(null)
         })
 
-        mockedGlob.mockImplementationOnce((_path, callback) => {
+        mockedGlob.mockImplementationOnce((_path, _opts, callback) => {
             callback(null, [scaffoldLocation])
         })
 
@@ -142,7 +142,7 @@ describe("Scaffold CLI", () => {
         spyLogInfo.mockImplementation((msg) => { _stdOut += msg + "\n" })
         spyLogError.mockImplementation((msg) => { _stdError += msg + "\n" })
 
-        mockedGlob.mockImplementationOnce((_path, callback) => {
+        mockedGlob.mockImplementationOnce((_path, _opts, callback) => {
             callback(null, [scaffoldLocation])
         })
 

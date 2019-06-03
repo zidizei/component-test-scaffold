@@ -16,7 +16,7 @@ describe("Scaffold CLI", () => {
         })
 
         it("can glob scaffold files", async () => {
-            mockedGlob.mockImplementation((_path, callback) => {
+            mockedGlob.mockImplementation((_path, _opts, callback) => {
                 callback(null, ["hello", "world"])
             })
 
@@ -24,24 +24,26 @@ describe("Scaffold CLI", () => {
             expect(actual).toEqual(["hello", "world"])
             expect(mockedGlob).toHaveBeenCalledWith(
                 expect.stringMatching(/__scaffolds__\/\*\.scaffold\.js$/),
+                expect.any(Object),
                 expect.any(Function)
             )
         })
 
         it("can glob scaffold files with patterns", async () => {
-            mockedGlob.mockImplementation((_path, callback) => {
+            mockedGlob.mockImplementation((_path, _opts, callback) => {
                 callback(null, [])
             })
 
             await glob(["main.test", "other.spec"])
             expect(mockedGlob).toHaveBeenCalledWith(
                 expect.stringMatching(/__scaffolds__\/\+\(main\.test\|other\.spec\)\.\*\.scaffold\.js$/),
+                expect.any(Object),
                 expect.any(Function)
             )
         })
 
         it("rejects with an error when failing to glob files", async () => {
-            mockedGlob.mockImplementation((_path, callback) => {
+            mockedGlob.mockImplementation((_path, _opts, callback) => {
                 callback(new Error("Failed"), [])
             })
 

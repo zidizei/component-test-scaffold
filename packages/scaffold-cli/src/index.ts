@@ -1,4 +1,6 @@
 import chalk from "chalk"
+import path from "path"
+
 import writeBackScaffold, { IScaffoldData } from "@component-test/scaffold-core"
 
 import { Parsed } from "./cli"
@@ -33,17 +35,17 @@ export async function update(patterns: Array<string>, {verbose}: Parsed): Promis
 }
 
 async function updateScaffolds(matches: string[], verbose?: boolean) {
-    const writeScaffolds = async (scaffolds: { [c: string]: IScaffoldData }, verbose?: boolean) => {
+    const writeScaffolds = async (scaffolds: { [c: string]: IScaffoldData }, filePath: string, verbose?: boolean) => {
         const updates = Object.keys(scaffolds).map((casename) => {
-            const {url, test: filename} = scaffolds[casename]
+            const {url, test} = scaffolds[casename]
 
             if (verbose) {
                 log.verbose("Updating '" + casename + "'.")
             }
 
             return writeBackScaffold(url, {
-                filename,
                 casename,
+                filename: path.resolve(path.dirname(filePath), test),
                 writeback: true,
                 loadStrategy: "networkOnly"
             })
@@ -54,7 +56,7 @@ async function updateScaffolds(matches: string[], verbose?: boolean) {
 
     const files = matches.map((filePath) => {
         const scaffold: { [c: string]: IScaffoldData } = require(filePath)
-        return writeScaffolds(scaffold, verbose)
+        return writeScaffolds(scaffold, filePath, verbose)
     })
 
     return Promise.all(files)
