@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Scaffold CLI can update multiple Scaffold files 1`] = `
+"Updating [1m2[22m Scaffold files.
+Updating 'test case'.
+Updating 'test case'.
+"
+`;
+
+exports[`Scaffold CLI can update pattern-matched Scaffold file 1`] = `
+"Updating [1m1[22m Scaffold file.
+Matching patterns: [1mpattern.test.js[22m
+"
+`;
+
+exports[`Scaffold CLI can update single Scaffold file 1`] = `
+"Updating [1m1[22m Scaffold file.
+"
+`;
+
+exports[`Scaffold CLI displays a message when an Error is being thrown 1`] = `
+"LoadFromUrlError: Failed to load Scaffold from URL 'https://localhost:8080/patterns/component'.
+"
+`;

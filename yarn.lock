@@ -139,20 +139,6 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@component-test/scaffold-cli@file:packages/scaffold-cli":
-  version "0.0.1"
-  dependencies:
-    "@component-test/scaffold-core" "file:../../../../Library/Caches/Yarn/v4/npm-@component-test-scaffold-cli-0.0.1-efa56836-bbed-4578-bef7-56985e4b089f-1559299726200/node_modules/@component-test/scaffold-core"
-    glob "^7.1.4"
-    yargs "^13.2.4"
-
-"@component-test/scaffold-core@file:packages/scaffold-core":
-  version "0.0.1"
-  dependencies:
-    jsdom "^15.1.0"
-    node-fetch "^2.6.0"
-    prettier "^1.17.1"
-
 "@jest/console@^24.7.1":
   version "24.7.1"
   resolved "https://registry.yarnpkg.com/@jest/console/-/console-24.7.1.tgz#32a9e42535a97aedfe037e725bd67e954b459545"

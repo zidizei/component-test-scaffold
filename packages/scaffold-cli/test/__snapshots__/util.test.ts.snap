@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Scaffold CLI Logs can log URL Errors 1`] = `
+"[97m⚠️ Could not update Scaffold file(s).[39m
+[97m[39m[31m[1mLoadFromUrlError[22m[39m
+[31mFailed to load Scaffold from URL 'Message'.[39m"
+`;
+
+exports[`Scaffold CLI Logs can log info messages 1`] = `"[97mtest message[39m"`;
+
+exports[`Scaffold CLI Logs can log verbose messages 1`] = `"[90mtest message[39m"`;

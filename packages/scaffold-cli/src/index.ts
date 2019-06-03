@@ -1,28 +1,47 @@
-import load, { IScaffoldData } from "@component-test/scaffold-core"
+import chalk from "chalk"
+import writeBackScaffold, { IScaffoldData } from "@component-test/scaffold-core"
 
 import { Parsed } from "./cli"
-import { glob } from "./util"
+import { glob, log } from "./util"
 
 type Summary = {
     files: number
+    hasError?: boolean
 }
 
 export async function update(patterns: Array<string>, {verbose}: Parsed): Promise<Summary> {
     const matches = await glob(patterns)
     const summary = {
-        files: matches.length
+        files: matches.length,
+        hasError: false,
     }
 
-    await matches.forEach(async (filePath) => {
-        const scaffold: { [c: string]: IScaffoldData } = require(filePath)
-        const updates = Object.keys(scaffold).map((casename) => {
-            const {url, test: filename} = scaffold[casename]
+    log.info(`Updating ${chalk.bold(matches.length.toString())} Scaffold ${matches.length === 1 ? "file" : "files"}.`)
+
+    if (patterns.length > 0) {
+        log.info(`Matching patterns: ${chalk.bold(patterns.join(", "))}`)
+    }
+
+    try {
+        await updateScaffolds(matches, verbose)
+    } catch (e) {
+        summary.hasError = true
+        log.error(e)
+    }
+
+    return summary
+}
+
+async function updateScaffolds(matches: string[], verbose?: boolean) {
+    const writeScaffolds = async (scaffolds: { [c: string]: IScaffoldData }, verbose?: boolean) => {
+        const updates = Object.keys(scaffolds).map((casename) => {
+            const {url, test: filename} = scaffolds[casename]
 
             if (verbose) {
-                console.log("Updating '" + casename + "'.")
+                log.verbose("Updating '" + casename + "'.")
             }
 
-            return load(url, {
+            return writeBackScaffold(url, {
                 filename,
                 casename,
                 writeback: true,
@@ -30,8 +49,13 @@ export async function update(patterns: Array<string>, {verbose}: Parsed): Promis
             })
         })
 
-        await Promise.all(updates)
+        return Promise.all(updates)
+    }
+
+    const files = matches.map((filePath) => {
+        const scaffold: { [c: string]: IScaffoldData } = require(filePath)
+        return writeScaffolds(scaffold, verbose)
     })
 
-    return summary
+    return Promise.all(files)
 }
