@@ -1,5 +1,5 @@
 {
-  "name": "@component-test/scaffold-core",
+  "name": "component-test-scaffold",
   "version": "0.0.1",
   "description": "Core package for scaffolding templates from a backend server for testing.",
   "main": "dist/index.js",
