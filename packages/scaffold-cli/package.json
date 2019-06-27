@@ -1,6 +1,6 @@
 {
   "name": "component-test-scaffold-cli",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.0",
   "description": "Scaffold markup from backend templates for testing.",
   "main": "dist/index.js",
   "bin": {
@@ -15,8 +15,8 @@
   "author": "Patrick Lam <zidizei@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "component-test-scaffold": "*",
     "chalk": "^2.4.2",
+    "component-test-scaffold": "^0.0.1-alpha.0",
     "glob": "^7.1.4",
     "yargs": "^13.2.4"
   }
