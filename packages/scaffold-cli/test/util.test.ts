@@ -1,7 +1,7 @@
 import baseGlob from "glob"
 import console from "console"
 
-import { LoadFromUrlError } from "@component-test/scaffold-core/dist/error"
+import { LoadFromUrlError } from "component-test-scaffold/dist/error"
 
 import { glob, log } from "../src/util"
 

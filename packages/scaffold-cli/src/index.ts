@@ -1,7 +1,7 @@
 import chalk from "chalk"
 import path from "path"
 
-import writeBackScaffold, { IScaffoldData } from "@component-test/scaffold-core"
+import writeBackScaffold, { IScaffoldData } from "component-test-scaffold"
 
 import { Parsed } from "./cli"
 import { glob, log } from "./util"

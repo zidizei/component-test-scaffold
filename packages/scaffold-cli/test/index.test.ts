@@ -2,7 +2,7 @@ import baseGlob from "glob"
 import path from "path"
 import fs from "fs"
 
-import { IScaffoldData } from "@component-test/scaffold-core"
+import { IScaffoldData } from "component-test-scaffold"
 
 import { log } from "../src/util"
 import { Parsed } from "../src/cli"
