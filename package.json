@@ -29,8 +29,8 @@
     "typescript": "^3.4.5"
   },
   "dependencies": {
-    "component-test-scaffold-cli": "file:packages/scaffold-cli",
-    "component-test-scaffold": "file:packages/scaffold-core"
+    "component-test-scaffold": "file:packages/scaffold-core",
+    "component-test-scaffold-cli": "file:packages/scaffold-cli"
   },
   "workspaces": {
     "packages": [
